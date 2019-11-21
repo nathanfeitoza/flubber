@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class PhoneAuthentication extends StatefulWidget {
+
+  PhoneAuthentication(){
+    _PhoneAuthenticationState();
+  }
   @override
   _PhoneAuthenticationState createState() => _PhoneAuthenticationState();
 }
@@ -11,6 +15,11 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
   String phoneNo = "+5579998769848";
   String smsCode = "123456";
   String verificationId;
+
+  _PhoneAuthenticationState() {
+    print("BOAAA FUNCIONOU!!!");
+    verificarPhone();
+  }
 
   void initState(){
     super.initState();

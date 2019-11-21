@@ -103,7 +103,7 @@ class _ExhibitionBottomState extends State<ExhibitionBottom>
                                     },
                                     focusNode: focusNode,
                                     controller: phoneTextController,
-                                    keyboardType: TextInputType.number,
+                                    keyboardType: TextInputType.phone,
                                     onSubmitted: (text) {
                                       PhoneAuthentication();
                                     },
@@ -115,7 +115,7 @@ class _ExhibitionBottomState extends State<ExhibitionBottom>
                                         border: InputBorder.none,
                                         labelText: "Entre com o número do celular",
                                         labelStyle: TextStyle(
-                                            fontFamily: "Pacifico",
+                                            fontFamily: "Kanit",
                                             fontSize: 20
                                         )),
                                   ),
