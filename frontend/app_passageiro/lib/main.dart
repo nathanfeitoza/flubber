@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:app_passageiro/src/ui/pages/login.dart';
-import 'package:app_passageiro/src/ui/pages/phone_auth.dart';
 import 'package:app_passageiro/src/ui/pages/home_page.dart';
 
 void main() => runApp(FlubberApp());
@@ -15,7 +14,7 @@ class FlubberApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: './',
-      routes: {
+      routes: <String, WidgetBuilder>{
         '/homepage': (BuildContext context) => HomePage(),
         '/': (context) => LoginView(),
       },

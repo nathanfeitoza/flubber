@@ -1,30 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:app_passageiro/src/ui/pages/home_page.dart';
 
-class PhoneAuthentication extends StatefulWidget {
+class PhoneAuthentication{
 
-  PhoneAuthentication(){
-    _PhoneAuthenticationState();
-  }
-  @override
-  _PhoneAuthenticationState createState() => _PhoneAuthenticationState();
-}
-
-class _PhoneAuthenticationState extends State<PhoneAuthentication> {
-
-  String phoneNo = "+5579998769848";
-  String smsCode = "123456";
+  String phoneNumber;
+  String smsCode;
   String verificationId;
+  BuildContext context;
 
-  _PhoneAuthenticationState() {
-    print("BOAAA FUNCIONOU!!!");
+  PhoneAuthentication({@required this.context, @required this.phoneNumber}) {
     verificarPhone();
   }
-
-  void initState(){
-    super.initState();
-    verificarPhone();
-  }
+  
   Future<void> verificarPhone() async {
     final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
       this.verificationId = verId;
@@ -46,10 +34,10 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
     };
 
     await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: this.phoneNo,
+        phoneNumber: this.phoneNumber,
         codeAutoRetrievalTimeout: autoRetrieve,
         codeSent: smsCodeSent,
-        timeout: const Duration(seconds: 5),
+        timeout: const Duration(seconds: 20),
         verificationCompleted: verifiedSuccess,
         verificationFailed: verifiedFailed
     );
@@ -70,12 +58,13 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
             contentPadding: EdgeInsets.all(10.0),
             actions: <Widget>[
               new FlatButton(
-                  child: Text("Pronto!"),
+                  child: Text("Entrar!"),
                   onPressed: () {
                     FirebaseAuth.instance.currentUser().then((user) {
                       if (user != null) {
                         Navigator.of(context).pop();
-                        Navigator.of(context).pushReplacementNamed("/homepage");
+                        //Navigator.of(context).pushReplacementNamed("/homepage");
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
                       } else {
                         Navigator.of(context).pop();
                         signIn();
@@ -100,10 +89,5 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
     }).catchError((e) {
       print(e);
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

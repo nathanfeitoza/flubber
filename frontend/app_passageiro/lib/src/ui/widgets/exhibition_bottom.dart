@@ -1,26 +1,28 @@
 import 'dart:ui';
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:app_passageiro/main.dart';
 import 'package:app_passageiro/src/ui/pages/phone_auth.dart';
 
 const double minHeight = 230;
+String phoneNo;
+FocusNode focusNode;
+FocusNode focusNodePassword;
 
 class ExhibitionBottom extends StatefulWidget {
   @override
   _ExhibitionBottomState createState() => _ExhibitionBottomState();
 }
 
-TextEditingController phoneTextController;
-TextEditingController passwordTextController;
-String passText;
-String phoneText;
-FocusNode focusNode;
-FocusNode focusNodePassword;
-
 class _ExhibitionBottomState extends State<ExhibitionBottom>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 3600));
+    focusNode = FocusNode();
+  }
 
   double get headerTopMargin =>
       lerp(20, 20 + MediaQuery
@@ -39,28 +41,15 @@ class _ExhibitionBottomState extends State<ExhibitionBottom>
   double get itemBorderRadius => lerp(8, 24);
   double get iconLeftBorderRadius => itemBorderRadius;
   double get iconRightBorderRadius => lerp(8, 0);
+  double lerp(double min, double max) => lerpDouble(min, max, _controller.value);
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 3600));
-    focusNode = FocusNode();
-    //focusNodePassword = FocusNode();
-  }
-
-  int _timesTapped = 0;
-
-  double lerp(double min, double max) =>
-      lerpDouble(min, max, _controller.value);
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    phoneTextController.dispose();
-    passwordTextController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _controller.dispose();
+  //   phoneTextController.dispose();
+  //   passwordTextController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -98,14 +87,13 @@ class _ExhibitionBottomState extends State<ExhibitionBottom>
                                   child: TextField(
                                     onChanged: (text) {
                                       setState(() {
-                                        phoneText = text;
+                                        phoneNo = text;
                                       });
                                     },
                                     focusNode: focusNode,
-                                    controller: phoneTextController,
                                     keyboardType: TextInputType.phone,
                                     onSubmitted: (text) {
-                                      PhoneAuthentication();
+                                      FocusScope.of(context).unfocus();
                                     },
                                     decoration: InputDecoration(
                                         prefixIcon: Container(
@@ -116,7 +104,7 @@ class _ExhibitionBottomState extends State<ExhibitionBottom>
                                         labelText: "Entre com o número do celular",
                                         labelStyle: TextStyle(
                                             fontFamily: "Kanit",
-                                            fontSize: 20
+                                            fontSize: 16
                                         )),
                                   ),
                                 ),
@@ -165,7 +153,6 @@ class _ExhibitionBottomState extends State<ExhibitionBottom>
   }
 
   void _toogle() {
-    print("teste!");
     final bool isOpen = _controller.status == AnimationStatus.completed;
     print(isOpen.toString());
     _controller.fling(velocity: 0.1); //isOpen ? -2 :
@@ -190,7 +177,7 @@ class BotaoFlutuante extends StatelessWidget {
         opacity: isVisible ? 1 : 0,
         duration: Duration(milliseconds: 200),
         child: RawMaterialButton(
-          onPressed: () => PhoneAuthentication(),
+          onPressed: () => PhoneAuthentication(context: context, phoneNumber: phoneNo),
           splashColor: Colors.white,
           fillColor: Colors.lightBlue,
           elevation: 15.0,
@@ -208,11 +195,6 @@ class BotaoFlutuante extends StatelessWidget {
     );
   }
 }
-
-/*void _onLoginClick(BuildContext context) {
-  String email = phoneText;
-  String pass = passText;
-}*/
 
 
 class CreateVamosComecar extends StatelessWidget {
@@ -235,62 +217,6 @@ class CreateVamosComecar extends StatelessWidget {
   }
 }
 
-/*class CriarCampoSenha extends StatefulWidget {
-  final bool isVisible;
-
-  const CriarCampoSenha({Key key, this.isVisible}) : super(key: key);
-
-  @override
-  _CriarCampoSenhaState createState() => _CriarCampoSenhaState();
-}
-
-class _CriarCampoSenhaState extends State<CriarCampoSenha> {
-  @override
-  Widget build(BuildContext context) {
-    void _reqFocusPassword() {
-      FocusScope.of(context).requestFocus(focusNodePassword);
-    }
-
-    return Positioned(
-        top: 160,
-        left: 25,
-        child: AnimatedOpacity(
-            opacity: widget.isVisible ? 1 : 0,
-            duration: Duration(milliseconds: 200),
-            child: GestureDetector(
-              onTap: _reqFocusPassword,
-              child: Container(
-                width: 600,
-                child: IgnorePointer(
-                  child: TextField(
-                      focusNode: focusNodePassword,
-                      controller: passwordTextController,
-                      onChanged: (text) {
-                        setState(() {
-                          passText = text;
-                        });
-                      },
-                      onTap: _reqFocusPassword,
-                      onSubmitted: (text) {
-                        _onLoginClick(context);
-                      },
-                      keyboardType: TextInputType.text,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          prefixIcon: Container(
-                            width: 50,
-                            child: Icon(Icons.lock),
-                          ),
-                          border: InputBorder.none,
-                          labelText: "Insira sua senha",
-                          labelStyle: TextStyle(
-                              fontSize: 20, fontFamily: "Pacifico"))),
-                ),
-              ),
-            )));
-  }
-}*/
-
 class CriarNovaConta extends StatelessWidget {
   final bool isVisible;
 
@@ -306,9 +232,9 @@ class CriarNovaConta extends StatelessWidget {
           duration: Duration(milliseconds: 200),
           child: GestureDetector(
               onTap: () {},
-              child: Text("Criar uma nova conta",
+              child: Text("SOBRE NÓS",
                   style: TextStyle(
-                      fontSize: 20, fontFamily: "Kanit", color: Colors.blue))),
+                      fontSize: 18, fontFamily: "Kanit", color: Colors.blue))),
         )
     );
   }
