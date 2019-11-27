@@ -8,12 +8,57 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:900506149102:android:aafbdb9ddf8f3810d3d3ff",
+        "mobilesdk_app_id": "1:900506149102:android:d8c8dcdd3d642379d3d3ff",
         "android_client_info": {
           "package_name": "com.flubber.app_motorista"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "900506149102-qfv9daltsp56qndhfg35ajuq0d5jb3c7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flubber.app_motorista",
+            "certificate_hash": "d402ca5f20247871a82f95332c5aa5bb50041311"
+          }
+        },
+        {
+          "client_id": "900506149102-3lli2ekvtk9dim2nou3876jpnc52iane.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-q_9T3r_Odgn285ndpmb2SfaHb0pfo1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "900506149102-3lli2ekvtk9dim2nou3876jpnc52iane.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900506149102:android:aa862b71e16c5f36d3d3ff",
+        "android_client_info": {
+          "package_name": "com.flubber.app_passageiro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "900506149102-0bhv2icf72j9qbmr8p9kqtphh1ljjo36.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flubber.app_passageiro",
+            "certificate_hash": "9c2a83c323d2e335761c5579f682e44c48de2c8d"
+          }
+        },
         {
           "client_id": "900506149102-3lli2ekvtk9dim2nou3876jpnc52iane.apps.googleusercontent.com",
           "client_type": 3

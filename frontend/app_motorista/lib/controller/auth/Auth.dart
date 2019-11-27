@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:app_motorista/controller/home/HomeState.dart';
+import 'package:app_motorista/controller/auth/AuthState.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+class Auth extends StatefulWidget {
+  Auth({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (HomePagedefined below) that contains fields that affect
@@ -16,5 +16,5 @@ class HomePage extends StatefulWidget {
   final String title;
 
   @override
-  HomePageState createState() => HomePageState();
+  AuthState createState() => AuthState();
 }

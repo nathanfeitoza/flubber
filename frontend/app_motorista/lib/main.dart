@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app_motorista/controller/home/HomeState.dart';
+import 'package:app_motorista/controller/auth/Auth.dart';
 import 'package:app_motorista/controller/home/Home.dart';
 
 void main() => runApp(MyApp());
@@ -47,7 +47,11 @@ class MyApp extends StatelessWidget {
                 body2: TextStyle( color: Colors.white ),
             ),
       ),
-      home: HomePage(title: 'Flubber'),
+      initialRoute: './',
+      routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) => Auth(title: 'Flubber'),
+        '/homepage': (BuildContext context) => HomePage(title: 'Flubber'),
+      },
     );
   }
 }
